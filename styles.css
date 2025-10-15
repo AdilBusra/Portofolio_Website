@@ -127,33 +127,87 @@ h2 {
   transform: scale(1.1);
 }
 
-.about-text {
+
+/* Styling untuk Grid Informasi di Section About Me */
+.info-grid {
+  display: grid;
+  /* Kita buat 6 kolom agar mudah dibagi 2 dan 3 */
+  grid-template-columns: repeat(6, 1fr); 
+  gap: 1.5rem;
+  margin: 3rem auto;
+  max-width: 900px;
+}
+
+.grid-item {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border: 1px solid #e8e8e8;
   text-align: center;
-  max-width: 800px;
 }
 
-.info-table {
-  width: 100%;
-  max-width: 600px;
-  margin: 2rem auto;
-  border-collapse: collapse;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.info-table th,
-.info-table td {
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.info-table th {
-  background-color: #f0f8ff;
+.grid-item h4 {
+  font-size: 0.9rem;
   color: #0072ff;
   font-weight: 500;
-  width: 30%;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.grid-item p {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Mengatur item agar membentang sesuai kebutuhan */
+.grid-item-full {
+  grid-column: span 6; /* Membentang penuh 6 kolom */
+}
+
+/* Mengatur item agar membentang sesuai kebutuhan */
+.grid-item-full {
+  grid-column: span 6; /* Membentang penuh 6 kolom */
+}
+
+/* KELAS BARU DITAMBAHKAN DI SINI */
+.grid-item-third {
+  grid-column: span 2; /* Membentang sepertiga (2 dari 6 kolom) */
+}
+
+.grid-item-half {
+  grid-column: span 3; /* Membentang setengah (3 dari 6 kolom) */
+}
+
+/* Penyesuaian untuk layar kecil (diperbarui) */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr; /* Ubah jadi 1 kolom di HP */
+  }
+
+  /* Reset bentangan agar semua item lebarnya sama */
+  .grid-item-full,
+  .grid-item-third, /* Tambahkan ini */
+  .grid-item-half {
+    grid-column: span 1;
+  }
+}
+.grid-item-half {
+  grid-column: span 3; /* Membentang setengah (3 dari 6 kolom) */
+}
+
+/* Penyesuaian untuk layar kecil */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr; /* Ubah jadi 1 kolom di HP */
+  }
+
+  /* Reset bentangan agar semua item lebarnya sama */
+  .grid-item-full,
+  .grid-item-half {
+    grid-column: span 1;
+  }
 }
 
 .intro-box {
@@ -200,34 +254,97 @@ h2 {
   color: #666;
 }
 
-/* Interests Section */
-.interest-item {
-  margin-bottom: 2rem;
+/* Styling untuk Section Ketertarikan (Segmented Bar) */
+.segmented-bar {
+  display: flex; /* Kunci utama untuk membuat item berjajar */
+  width: 100%;
+  height: 40px; /* Tinggi bar */
+  margin-top: 3rem;
+  border-radius: 20px; /* Membuat ujung bar melengkung */
+  overflow: hidden; /* Penting agar segmen di dalamnya ikut melengkung */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.interest-item h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.progress-bar {
-  height: 30px;
-  background-color: #e0f7fa;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
+.bar-segment {
+  flex: 1; /* Membuat setiap segmen memiliki lebar yang sama */
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 500;
-  border-radius: 15px 0 0 15px;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
 }
+
+/* Styling untuk Kotak Penjelasan di Bawah Bar */
+.interest-explanations {
+  display: flex; /* Kunci untuk membuat kotak berjajar */
+  gap: 1.5rem; /* Jarak antar kotak */
+  margin-top: 2rem; /* Jarak dari bar di atas */
+}
+
+.explanation-box {
+  flex: 1; /* Membuat setiap kotak memiliki lebar yang sama, sejajar dengan bar */
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-top: 4px solid; /* Siapkan tempat untuk warna penanda */
+}
+
+.explanation-box h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.explanation-box p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Beri warna border-top yang sama dengan warna segmen bar */
+.explanation-box:nth-child(1) { border-color: #0072ff; }
+.explanation-box:nth-child(2) { border-color: #008cff; }
+.explanation-box:nth-child(3) { border-color: #00a6ff; }
+.explanation-box:nth-child(4) { border-color: #00c0ff; }
+.explanation-box:nth-child(5) { border-color: #00daff; }
+
+/* Penyesuaian untuk layar kecil */
+@media (max-width: 768px) {
+  .interest-explanations {
+    flex-direction: column; /* Ubah jadi tumpukan vertikal di HP */
+  }
+}
+
+/* Memberi warna berbeda untuk setiap segmen */
+.bar-segment:nth-child(1) { background-color: #0072ff; }
+.bar-segment:nth-child(2) { background-color: #008cff; }
+.bar-segment:nth-child(3) { background-color: #00a6ff; }
+.bar-segment:nth-child(4) { background-color: #00c0ff; }
+.bar-segment:nth-child(5) { background-color: #00daff; }
+
+/* Efek hover agar lebih interaktif */
+.bar-segment:hover {
+  transform: scale(1.05); /* Sedikit membesar saat disentuh mouse */
+  filter: brightness(1.1); /* Menjadi sedikit lebih terang */
+  z-index: 10;
+}
+
+/* Penyesuaian untuk layar kecil agar teks tidak terlalu besar */
+@media (max-width: 768px) {
+  .segmented-bar {
+    height: 35px;
+  }
+  .bar-segment {
+    font-size: 0.7rem; /* Perkecil font di HP */
+  }
+}
+
+
+
 
 /* Contact Section */
 .contact-info {
@@ -436,19 +553,49 @@ footer {
   box-shadow: 0 5px 20px rgba(0,0,0,0.07);
 }
 
-.kutipan {
-  font-size: 1.2rem;
-  font-style: italic;
-  line-height: 1.8;
-  color: #555;
-  margin-bottom: 1.5rem;
-  text-align: center;
+/* Styling untuk Section Pesan & Kesan yang baru */
+/* Styling untuk Section Pesan & Kesan (Dua Kotak) */
+.pesan-container {
+  max-width: 750px;
+  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column; /* Menyusun kotak ke bawah */
+  gap: 2rem; /* Jarak antara dua kotak */
 }
 
-.penulis {
-  font-weight: 600;
+.pesan-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+  border: 1px solid #e8e8e8;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pesan-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.pesan-box i {
+  font-size: 2.5rem;
+  color: #00c6ff;
+  flex-shrink: 0;
+}
+
+.pesan-box h4 {
   color: #0072ff;
-  text-align: right;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.pesan-box p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
 }
 
 /* Styling untuk blok contoh kode */
@@ -852,3 +999,4 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
